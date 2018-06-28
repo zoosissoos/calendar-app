@@ -55,6 +55,7 @@ const styles = {
     padding: '4px'
   },
   block: {
+    height: '150px',
     boxSizing: 'border-box',
     borderStyle: 'solid',
     borderColor: 'black',

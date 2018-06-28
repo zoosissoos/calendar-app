@@ -4,9 +4,9 @@ import _ from 'lodash';
 import { connect } from 'react-redux';
 import { fetchMonthEvents } from '../actions';
 import Day from './Day';
+import DatesBar from './DatesBar';
 
 class Calendar extends Component {
-
   constructor(props){
     super(props);
     this.state = {
@@ -85,6 +85,18 @@ class Calendar extends Component {
     return filtArr
   }
 
+  //renders month title
+  renderMonth() {
+    const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    const month = this.state.date.getMonth();
+    return (
+      <div style={styles.month}>
+        {months[month]}
+        <hr />
+      </div>
+    )
+  }
+
 
   //renders days with spaces
   renderDays() {
@@ -118,8 +130,12 @@ class Calendar extends Component {
   render() {
     if(this.state.datesDisp.length > 0){
       return (
-        <div style={styles.cal}>
-          {this.renderDays()}
+        <div>
+          {this.renderMonth()}
+          <DatesBar style={styles.cal}/>
+          <div style={styles.cal}>
+            {this.renderDays()}
+          </div>
         </div>
       )
     } else {
@@ -136,13 +152,18 @@ const styles = {
   cal: {
     boxSizing: 'border-box',
     width: '80vw',
-    height: '90vh',
     color: 'black',
     margin: '0 auto',
     display: 'flex',
     flexFlow: 'row wrap',
     position: 'relative',
     justifyContent: 'space-evenly'
+  },
+  month: {
+    margin: '0 auto',
+    width: '80vw',
+    textAlign: 'center',
+    fontSize: '40px'
   }
 }
 
